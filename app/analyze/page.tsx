@@ -1,7 +1,7 @@
 'use client'
 import { useState } from 'react'
 import axios from 'axios';
-import Navbar from '../components/navbar';
+import Navbar from '../section/navbar';
 
 const Analyze = () => {
     const [uploading, setUploading] = useState(false);

@@ -1,7 +1,7 @@
 import Image from "next/image";
-import Navbar from "./components/navbar";
+import Navbar from "./section/navbar";
 import Link from "next/link";
-import Footer from "./components/footer";
+import Footer from "./section/footer";
 
 export default function Home() {
   const heroText = {
@@ -39,7 +39,7 @@ export default function Home() {
               {heroText.body}
             </p>
             <div className="flex justify-center md:justify-start space-x-4">
-              <Link href="/analyze" className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition duration-300 flex items-center space-x-2">
+              <Link href="/analyze" className="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-400 transition duration-300 flex items-center space-x-2">
                 <span>Get Started Now</span>
               </Link>
             </div>
