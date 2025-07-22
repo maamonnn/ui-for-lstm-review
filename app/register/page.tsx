@@ -13,6 +13,7 @@ export default function RegisterPage() {
     const supabase = createClient();
     const [registerData, setregisterData] = useState<IUser>({ email: '', password: '' });
     const [msg, setMsg] = useState('');
+    const [status, setStatus] = useState(false)
     const router = useRouter();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,7 +49,7 @@ export default function RegisterPage() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-lg py-16 px-16 rounded-lg border shadow-xl bg-card">
                 <h1 className="text-3xl font-extrabold text-center mb-4">Register</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid w-full items-center gap-1.5">
@@ -59,12 +60,12 @@ export default function RegisterPage() {
                         <Label htmlFor="password">Password</Label>
                         <Input id="password" name="password" type="password" placeholder="••••••••" value={registerData.password} onChange={handleChange} required />
                     </div>
-                    {msg && <p className="text-sm text-red-400">{msg}</p>}
-                    <Button className="w-full bg-blue-600 hover:bg-blue-400" type="submit">
+                    {msg && (status ? (<p className="text-sm text-green-700 bg-green-300 rounded-lg p-2 w-fit">{msg}</p>) : (<p className="text-sm text-red-700 bg-red-300 rounded-lg p-2 w-fit">{msg}</p>))}
+                    <Button className="w-full text-secondary-foreground bg-blue-600 hover:bg-blue-400" type="submit">
                         Sign Up
                     </Button>
                     
-                    <p className="text-center text-sm text-gray-700 font-medium">
+                    <p className="text-center text-sm text-muted-foreground font-medium">
                         Sudah punya akun? <Link href='/login' className="text-blue-600 hover:underline hover:text-purple-800">Login</Link>
                     </p>
                 </form>

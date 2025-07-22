@@ -13,6 +13,7 @@ export default function LoginPage() {
     const supabase = createClient();
     const [loginData, setLoginData] = useState<IUser>({ email: '', password: '' });
     const [msg, setMsg] = useState('');
+    const [status, setStatus] = useState(false)
     const router = useRouter();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,8 +38,9 @@ export default function LoginPage() {
 
             console.log("Login berhasil, data user:", data.user);
             setMsg("Login berhasil! Mengarahkan ke dashboard...");
+            setStatus(true)
 
-            router.push('/analyze');
+            router.push('/dashboard');
 
         } catch (error) {
             console.error("Terjadi kesalahan tak terduga:", error);
@@ -48,7 +50,7 @@ export default function LoginPage() {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="w-full max-w-sm">
+            <div className="w-full max-w-lg py-16 px-16 rounded-lg border shadow-xl bg-card">
                 <h1 className="text-3xl font-extrabold text-center mb-4">Login</h1>
                 <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid w-full items-center gap-1.5">
@@ -59,12 +61,12 @@ export default function LoginPage() {
                         <Label htmlFor="password">Password</Label>
                         <Input id="password" name="password" type="password" placeholder="••••••••" value={loginData.password} onChange={handleChange} required />
                     </div>
-                    {msg && <p className="text-sm text-red-400">{msg}</p>}
-                    <Button className="w-full bg-blue-600 hover:bg-blue-400" type="submit">
+                    {msg && (status ? (<p className="text-sm text-green-700 bg-green-300 rounded-lg p-2 w-fit border border-green-700">{msg}</p>) : (<p className="text-sm text-red-700 bg-red-300 rounded-lg p-2 w-fit border border-red-700">{msg}</p>))}
+                    <Button className="w-full bg-blue-600 hover:bg-blue-400 text-secondary-foreground" type="submit">
                         Sign In
                     </Button>
                     
-                    <p className="text-center text-sm text-gray-700 font-medium">
+                    <p className="text-center text-sm text-muted-foreground font-medium">
                         Belum punya akun? <Link href='/register' className="text-blue-600 hover:underline hover:text-purple-800">Daftar</Link>
                     </p>
                 </form>
